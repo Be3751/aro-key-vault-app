@@ -6,7 +6,43 @@ metadata:
 spec:
   containers:
   - name: aro-key-vault-app
-    image: acrj8ba3.azurecr.io/aro-key-vault-app:latest
+    image: "<ACR_HOST>/aro-key-vault-app:latest"
+    env:
+      - name: ENV_TYPE
+        valueFrom:
+          secretKeyRef:
+            name: kv-secrets
+            key: ENV-TYPE
+      - name: AZURE_TENANT_ID
+        valueFrom:
+          secretKeyRef:
+            name: kv-secrets
+            key: AZURE-TENANT-ID
+      - name: AZURE_CLIENT_ID
+        valueFrom:
+          secretKeyRef:
+            name: kv-secrets
+            key: AZURE-CLIENT-ID
+      - name: AZURE_CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: kv-secrets
+            key: AZURE-CLIENT-SECRET
+      - name: PG_SERVER
+        valueFrom:
+          secretKeyRef:
+            name: kv-secrets
+            key: PG-SERVER
+      - name: PG_DATABASE
+        valueFrom:
+          secretKeyRef:
+            name: kv-secrets
+            key: PG-DATABASE
+      - name: PG_USER
+        valueFrom:
+          secretKeyRef:
+            name: kv-secrets
+            key: PG-USER
     volumeMounts:
       - name: secrets-store-inline
         mountPath: "/mnt/secrets-store"
