@@ -1,0 +1,25 @@
+# Git ignore for Java/Gradle and common artifacts
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Environment files (do not commit secrets)
+.env
+
+# Docker
+**/Dockerfile.*
+.dockerignore
+
+# Kubernetes manifests overrides/local
+*.local.yaml

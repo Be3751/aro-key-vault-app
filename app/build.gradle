@@ -1,0 +1,34 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+application {
+    mainClass = 'com.example.Main'
+}
+
+// Shadow plugin: fat jar output as app.jar
+tasks.named('shadowJar') {
+    archiveClassifier.set('') // Remove -all
+    archiveFileName.set('app.jar') // Output as app.jar
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    implementation 'org.postgresql:postgresql:42.7.3'
+    implementation 'com.azure:azure-identity:1.10.4'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// jar block not needed; shadowJar handles manifest
